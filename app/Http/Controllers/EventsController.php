@@ -70,6 +70,25 @@ class EventsController extends Controller
         return response()->json($data, 201);
     }
 
+    public function showAll(){
+        $events = Events::all();
+
+        if(!$events){
+            $data = [
+                "message" => 'no hay eventos registrados',
+                "status" => 404
+            ];
+            return response()->json($data);
+        }
+
+        $data = [
+            'message' => 'se encontraron los siguientes eventos',
+            'status' => 200
+        ];
+
+        return response()->json($events);
+    }
+
     public function show($id){
         $events = Events::find($id);
 
